@@ -1,0 +1,55 @@
+/* eslint-disable import/prefer-default-export */
+import { Types } from '../../request';
+import ApiTag from '../apiTags';
+
+export const signup = (fName, lName, termVal, userType, mobile, email, siteCode, sessionId) => {
+  const data = {
+    goStep: 'amtSignUp',
+    termVal: 'no',
+    instanceId: '1000000001',
+    siteCode,
+    channelId: 'null',
+    nriAccNum: 'null',
+    custIdNew: null,
+    utmSource: 'null',
+    utmMedium: 'null',
+    utmTerm: 'null',
+    utmContent: 'null',
+    utmCampaign: 'null',
+    utmAdGroup: 'null',
+    mktFlag: termVal,
+    checkBox: 'on',
+    countryRes: '77',
+    mobile,
+    email,
+    fname: fName,
+    lname: lName,
+    mobileccode: '1',
+    custId: '',
+    sessionId,
+    mname: '',
+    gender: '',
+    mm: '',
+    dd: '',
+    yyyy: '',
+    phonecCode: '',
+    phoneCityCode: '',
+    phoneNo: '',
+    address1: '',
+    address2: '',
+    state: '',
+    city: '',
+    zipCode: '',
+    marktMailflg: '',
+    userType,
+    initialLeadEntryFlag: 'insertValue',
+  };
+  return {
+    url: '/moneytransfer/saveContactDetails',
+    payload: data,
+    type: Types.POST,
+    tag: ApiTag.SIGNUP,
+    headers: {},
+    // authRequired: false,
+  };
+};
