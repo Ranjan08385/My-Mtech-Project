@@ -18,4 +18,26 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/login').post((req, res) => {
+  User.findOne({
+    username: req.body.username,
+    password: req.body.password
+  })
+    .then(user => {
+      if (user) {
+        const token = {
+          _id: user._id,
+          username: user.username,
+          status: 'success',
+        }
+        res.send(token);
+      } else {
+        res.json({error: 'User does not exist'})
+      }
+    })
+    .catch(err => {
+    res.send('error: ' + err)
+  })
+})
+
 module.exports = router;
