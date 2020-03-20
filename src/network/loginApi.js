@@ -2,15 +2,13 @@
 import { Types } from './request';
 
 const GetLoginService = userDetails => {
+  console.log("User Details", userDetails);
   return {
-    url: 'users',
+    url: 'users/login',
     payload: userDetails,
-    type: Types.GET,
+    type: Types.POST,
     tag: 'login Service',
-    // headers: {},
-    // authRequired: false,
-    // csrfToken: true,
-    // userId
+    headers: { 'Content-Type': 'application/json' },
   };
 };
 

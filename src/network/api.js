@@ -6,9 +6,6 @@ import { getPrefData, PREF_AUTH_TOKEN } from '../storage/preferenceStorage';
 import { SOMETHING_WRONG, Types } from './request';
 
 const instance = axios.create({
-  // baseURL: 'https://m2istagingweb.icicibank.com/newm2iNetUS_NIVEUS_STAGING/m2ipwa',
-  // baseURL: 'https://m2istagingweb.icicibank.com/newm2iNetUS_NIVEUS_UAT/m2ipwa',
-  // baseURL: 'http://35.239.61.42:7001/newm2iNetUS_NIVEUS/m2ipwa/',
   baseURL: 'http://localhost:5000/',
 });
 
@@ -22,19 +19,19 @@ const makeAPICall = async request => {
   instance.defaults.timeout = 45000;
   instance.defaults.headers.post['Content-Type'] = 'application/json';
 
-  let authRequired;
-  if (request.authRequired === 'undefined' || request.authRequired === undefined) {
-    authRequired = true;
-  } else {
-    authRequired = request.authRequired;
-  }
+  // let authRequired;
+  // if (request.authRequired === 'undefined' || request.authRequired === undefined) {
+  //   authRequired = true;
+  // } else {
+  //   authRequired = request.authRequired;
+  // }
 
-  if (authRequired) {
-    // console.log('token 22', request.authRequired, authRequired);
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-  } else {
-    delete instance.defaults.headers.common.Authorization;
-  }
+  // if (authRequired) {
+  //   // console.log('token 22', request.authRequired, authRequired);
+  //   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+  // } else {
+  //   delete instance.defaults.headers.common.Authorization;
+  // }
 
   // console.log('token', request.authRequired, instance.defaults.headers);
 
@@ -48,17 +45,19 @@ const makeAPICall = async request => {
   let axiosRequest;
   const { type, url, payload, tag } = request;
 
-  // console.log(TAG, `type: ${type}`);
-  // console.log(TAG, `url: ${url}`);
-  // console.log(TAG, `payload: ${payload}`);
+  console.log(TAG, `type: ${type}`);
+  console.log(TAG, `url: ${url}`);
+  console.log(TAG, `payload: ${payload}`);
   if (type === Types.GET) {
     axiosRequest = instance.get(url);
   } else if (type === Types.POST) {
     axiosRequest = instance.post(url, payload);
+    console.log("axiosRequest", axiosRequest);
   }
 
   return axiosRequest
     .then(response => {
+      // console.log('response API', response);
       return { tag, data: response.data };
     })
     .catch(function(error) {

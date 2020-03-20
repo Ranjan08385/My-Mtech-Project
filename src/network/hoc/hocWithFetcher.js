@@ -17,17 +17,17 @@ const hocWithFetcher = Component => {
       };
     }
 
-    // registerDataReceived = callback => {
-    //   this.onDataReceived = callback;
-    // };
+    registerDataReceived = callback => {
+      this.onDataReceived = callback;
+    };
 
-    // registerLoading = callback => {
-    //   this.onLoading = callback;
-    // };
+    registerLoading = callback => {
+      this.onLoading = callback;
+    };
 
-    // registerError = callback => {
-    //   this.onError = callback;
-    // };
+    registerError = callback => {
+      this.onError = callback;
+    };
 
     makeAPICall = (
       request,
@@ -45,9 +45,10 @@ const hocWithFetcher = Component => {
           });
       makeAPICallz(request)
         .then(result => {
-          const jsonResponse = JSON.parse(result.data);
+          console.log("RRRRRR", result);
+          const jsonResponse = JSON.parse(JSON.stringify(result.data));
           jsonResponse.tag = result.tag;
-          // console.log('loading>', this.state.isLoading);
+          console.log('loading>', jsonResponse);
           if (receiveResponseFunc && loadingFunc) {
             if (jsonResponse.hasOwnProperty('tokenId')) {
               storePrefData(PREF_AUTH_TOKEN, jsonResponse.tokenId);
@@ -116,6 +117,7 @@ const hocWithFetcher = Component => {
     };
 
     render() {
+      console.log("Data ---->", this.state.data);
       return (
         <Component
           registerDataReceived={this.registerDataReceived}

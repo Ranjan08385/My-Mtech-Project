@@ -68,7 +68,7 @@ class LandingPage extends Component {
         username,
         password,
       };
-      makeAPICall(GetLoginService(data), this.onSuceessLogin);
+      makeAPICall(GetLoginService(data), res => this.onSuceessLogin(res), err => this.onErrorLogin(err));
     }
   };
 
@@ -76,14 +76,30 @@ class LandingPage extends Component {
     console.log("res", res);
     const { ShowToast } = this.context;
     const { navigation } = this.props;
-    ShowToast({
-      showToast: true,
-      message: `Login Successfull`,
-      duration: 3000,
-      align: 'center',
-      top: 'top',
-    });
-    navigation.navigate('DashBoard');
+    if (res.status === 'success') {
+      ShowToast({
+        showToast: true,
+        message: `Login Successfull`,
+        duration: 3000,
+        align: 'center',
+        top: 'top',
+      });
+      navigation.navigate('DashBoard');
+    } else {
+      ShowToast({
+        showToast: true,
+        message: `${res.error}`,
+        duration: 3000,
+        align: 'center',
+        top: 'top',
+        errortype: 'error',
+      });
+    }
+    
+  }
+
+  onErrorLogin = err => {
+    console.log(err);
   }
 
   render() {
