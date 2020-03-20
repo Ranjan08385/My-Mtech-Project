@@ -9,7 +9,7 @@ const instance = axios.create({
   // baseURL: 'https://m2istagingweb.icicibank.com/newm2iNetUS_NIVEUS_STAGING/m2ipwa',
   // baseURL: 'https://m2istagingweb.icicibank.com/newm2iNetUS_NIVEUS_UAT/m2ipwa',
   // baseURL: 'http://35.239.61.42:7001/newm2iNetUS_NIVEUS/m2ipwa/',
-  baseURL: 'https://m2istagingweb.icicibank.com/newm2iNetUS_NIVEUS_DEV/m2ipwa',
+  baseURL: 'http://localhost:5000/',
 });
 
 const TAG = 'APIREQUEST';

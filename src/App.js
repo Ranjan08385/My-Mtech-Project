@@ -11,6 +11,7 @@ import Toast from './components/Toast';
 
 import HomePage from './pages/home/landingPage';
 import DashBoard from './pages/dashBoard/dashboard';
+import Search from './pages/searchPage/search';
 
 import RoutesGenerator from './utils/route_wrapper';
 import LoaderComponent from './components/loaderComponent';
@@ -25,6 +26,10 @@ const routeMap = {
   DashBoard: {
     component: DashBoard,
     path: '/dashboard',
+  },
+  Search: {
+    component: Search,
+    path: '/search',
   },
 };
 

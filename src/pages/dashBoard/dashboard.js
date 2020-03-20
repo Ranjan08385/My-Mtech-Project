@@ -31,7 +31,7 @@ class DashBoard extends Component {
       menuArray: [
         {
           image: edit,
-          name: 'search',
+          name: 'Search',
         },
         {
           image: dashboard,
@@ -62,6 +62,13 @@ class DashBoard extends Component {
     };
   }
 
+  onClickOptions = name => {
+    const { navigation } = this.props;
+    if (name === 'Search') {
+      navigation.navigate('Search');
+    }
+  }
+
 
   render() {
     const { menuArray, password, usernameError, passwordError } = this.state;
@@ -89,7 +96,7 @@ class DashBoard extends Component {
           </View>
           <View style={Styles.menuOptions}>
             {menuArray.map((value, key) => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onClickOptions(value.name)}>
                 <View style={Styles.imgAndName}>
                   <View Style={Styles.iconImage}>
                     <Image source={value.image} style={Styles.logoStyle} />

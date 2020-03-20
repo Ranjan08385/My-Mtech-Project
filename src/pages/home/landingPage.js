@@ -13,6 +13,7 @@ import { validateUserName, validatePassword } from '../validation/validations';
 import { VALIDATIONS } from '../displayConstants/constants';
 import { AppConsumer } from '../../AppContext';
 import { getResponsiveStyle } from '../../utils/appUtils';
+import GetLoginService from '../../network/loginApi';
 
 const LoginImage = require('../images/login.png');
 const LoginLogo = require('../images/login-logo.png');
@@ -59,19 +60,30 @@ class LandingPage extends Component {
   }
 
   onLogin = () => {
-    const { ShowToast } = this.context;
-    const { navigation } = this.props;
+    const { makeAPICall } = this.props;
+    const { username, password } = this.state;
     const isValid = this.validate();
     if (isValid) {
-      ShowToast({
-        showToast: true,
-        message: `Login Successfull`,
-        duration: 3000,
-        align: 'center',
-        top: 'top',
-      });
-      navigation.navigate('DashBoard');
+      const data = {
+        username,
+        password,
+      };
+      makeAPICall(GetLoginService(data), this.onSuceessLogin);
     }
+  };
+
+  onSuceessLogin = res => {
+    console.log("res", res);
+    const { ShowToast } = this.context;
+    const { navigation } = this.props;
+    ShowToast({
+      showToast: true,
+      message: `Login Successfull`,
+      duration: 3000,
+      align: 'center',
+      top: 'top',
+    });
+    navigation.navigate('DashBoard');
   }
 
   render() {
